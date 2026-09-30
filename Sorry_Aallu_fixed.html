@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sorry Aallu 🐼</title>
+<style>
+:root{--bg:#ffd6e8;--pink:#ff5fa2;--deep:#c2185b;--lav:#d9b8ff;--cream:#fff7fb;--ink:#5b1a3a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:"Baloo 2","Comic Sans MS","Trebuchet MS",sans-serif;color:var(--ink);background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg opacity='.5'%3E%3Ccircle cx='30' cy='34' r='6' fill='%23222'/%3E%3Ccircle cx='66' cy='34' r='6' fill='%23222'/%3E%3Ccircle cx='48' cy='52' r='20' fill='%23fff'/%3E%3Cellipse cx='41' cy='50' rx='5' ry='6.5' fill='%23222' transform='rotate(-20 41 50)'/%3E%3Cellipse cx='55' cy='50' rx='5' ry='6.5' fill='%23222' transform='rotate(20 55 50)'/%3E%3Cellipse cx='48' cy='58' rx='3' ry='2' fill='%23222'/%3E%3Ccircle cx='35' cy='60' r='3.5' fill='%23ff8fb8'/%3E%3Ccircle cx='61' cy='60' r='3.5' fill='%23ff8fb8'/%3E%3C/g%3E%3C/svg%3E");background-size:160px;text-align:center;-webkit-tap-highlight-color:transparent}
+section{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 18px}
+.card{background:var(--cream);border:4px solid var(--pink);border-radius:32px;padding:26px 22px;max-width:440px;width:100%;box-shadow:0 10px 0 var(--lav)}
+h1{font-size:1.9rem;margin:.2em 0;color:var(--deep);line-height:1.1}
+h2{margin:0 0 6px;color:var(--deep)}
+p{margin:.4em 0 1em;font-size:1.05rem}
+button{font:inherit;font-weight:800;border:0;border-radius:999px;background:var(--pink);color:#fff;padding:12px 26px;font-size:1.1rem;box-shadow:0 5px 0 var(--deep);cursor:pointer}
+button:active{transform:translateY(4px);box-shadow:0 1px 0 var(--deep)}
+.big{font-size:4rem;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(3deg)}}
+.opt{display:block;width:100%;margin:10px 0;background:#fff;color:var(--ink);border:3px solid var(--lav);box-shadow:0 4px 0 var(--lav)}
+.opt.ok{background:#b9f3cf;border-color:#3cc57a}
+.opt.no{animation:shake .4s;background:#ffd0d8;border-color:#ff7b95}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.bar{height:14px;background:#ffd0e6;border-radius:99px;overflow:hidden;margin:10px 0}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--lav));transition:width .4s}
+.hide{display:none}
+#pop{position:fixed;inset:0;z-index:9;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(194,24,91,.55);backdrop-filter:blur(4px)}
+#pop.show{display:flex}
+#pop .card{animation:pop .7s cubic-bezier(.2,1.6,.4,1);text-align:center}
+@keyframes pop{from{transform:scale(.2) rotate(-8deg);opacity:0}}
+.conf{position:fixed;top:-30px;z-index:10;font-size:1.6rem;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+.letter p{text-align:left}
+#puzzlewrap{position:relative;width:260px;height:260px;margin:14px auto;border-radius:18px;overflow:hidden;border:4px solid var(--pink);box-shadow:0 6px 0 var(--lav)}
+#puzzleimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr)}
+.tile{border:2px solid rgba(255,255,255,.7);background:var(--pink);color:#fff;font-weight:800;font-size:2.2rem;border-radius:0;box-shadow:none;display:flex;align-items:center;justify-content:center;transition:opacity .3s,transform .3s}
+.tile.gone{opacity:0;pointer-events:none;transform:scale(.5)}
+#pnext{font-weight:800;color:var(--deep)}
+#catchwrap{position:relative;width:100%;max-width:340px;height:360px;margin:14px auto;border-radius:18px;overflow:hidden;border:4px solid var(--pink);background:linear-gradient(#ffeaf4,#ffd6e8);box-shadow:0 6px 0 var(--lav);touch-action:none}
+.fall-letter{position:absolute;top:0;left:0;will-change:transform;font-weight:900;font-size:1.8rem;color:var(--deep);background:#fff;border:3px solid var(--pink);border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center}
+#basket{position:absolute;bottom:6px;width:64px;height:40px;border-radius:0 0 30px 30px;background:var(--pink);border:3px solid var(--deep);left:50%;transform:translateX(-50%)}
+#caughtRow{display:flex;gap:6px;justify-content:center;margin:12px 0;font-size:1.6rem;font-weight:900;color:var(--deep)}
+.cslot{width:34px;height:40px;border:3px dashed var(--lav);border-radius:8px;display:flex;align-items:center;justify-content:center}
+#msg{font-weight:800;color:var(--deep);min-height:1.5em}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<section id="start">
+  <div class="card">
+    <div class="big">🐼</div>
+    <h1>A Little Sorry Quest</h1>
+    <p>Hi Aallu... I know I messed up. Will you let a clumsy panda try to make it right? Answer 10 little questions, solve one puzzle, and I promise something sweet at the end. 💔➡️💖</p>
+    <button onclick="go('q')">Begin</button>
+  </div>
+</section>
+
+<section id="q">
+  <div class="card">
+    <h2>Just a few questions...</h2>
+    <div class="bar"><i id="b1"></i></div>
+    <p id="qtext" style="font-weight:800"></p>
+    <div id="opts"></div>
+    <p id="msg"></p>
+  </div>
+</section>
+
+<section id="puzzle">
+  <div class="card">
+    <h2>Catch me, Aallu 🫶</h2>
+    <p>My name is falling apart... catch every letter of <b>MAAZ</b> before it hits the ground, or this panda will be heartbroken. Move the basket with your finger!</p>
+    <div id="caughtRow"></div>
+    <div id="catchwrap">
+      <div id="basket"></div>
+    </div>
+    <p id="pmsg" style="font-weight:800;color:var(--deep);min-height:1.5em"></p>
+    <button id="retryBtn" class="hide" onclick="setupPuzzle()">Try again</button>
+  </div>
+</section>
+
+
+<div id="pop">
+  <div class="card">
+    <div class="big">🐼💔</div>
+    <h1>I'M SO SORRY, AALLU</h1>
+    <p style="font-weight:800;color:var(--deep)">Please forgive your Strickyyyyy 💖</p>
+    <button onclick="closePop()">Read my letter</button>
+  </div>
+</div>
+
+<section id="gift" class="hide">
+  <div class="card letter">
+    <div class="big">🐼🤍</div>
+    <h2>My Aallu,</h2>
+    <p>I'm really sorry for hurting you. That was never my intention, and it's been sitting heavy on my heart. You mean the world to me, and seeing you upset breaks something in me too.</p>
+    <p>I promise to be more careful with your feelings, to listen better, and to never take you for granted. Thank you for being patient with me. I just want to see you smile again.</p>
+    <p style="text-align:right;font-weight:800;color:var(--deep)">Forever sorry, your Strickyyyyy 💖</p>
+  </div>
+</section>
+
+<script>
+function go(id){var e=document.getElementById(id);e.classList.remove('hide');e.scrollIntoView({behavior:'smooth'})}
+
+// 10 questions
+var Q=[
+ {q:'Am I hopelessly in love with you?',o:['Nope','Hopelessly, yes 💘'],a:1},
+ {q:'Do I think about your smile all day?',o:['Every single hour 🥰','Not at all'],a:0},
+ {q:'Was hurting my favourite person ever my intention?',o:['Never, not once','Maybe'],a:0},
+ {q:'Are you the most beautiful part of my life?',o:['Yes, always 💕','No'],a:0},
+ {q:'Do I want to hold your hand and make this right?',o:['More than anything 🤲','Not really'],a:0},
+ {q:'Is my heart yours, even when we fight?',o:['Always has been 💓','Not exactly'],a:0},
+ {q:'Do I dream about our future together?',o:['Every night 🌙','Not really'],a:0},
+ {q:'Do I miss your hugs right now?',o:['So much it hurts 🥺','Not really'],a:0},
+ {q:'Will I keep loving you even on hard days?',o:['Forever, yes','No'],a:0},
+ {q:'Is this panda hopelessly, truly yours?',o:['Kind of','Completely and forever 🐼💖'],a:1}
+],qi=0;
+function showQ(){
+  var x=Q[qi],box=document.getElementById('opts');
+  document.getElementById('qtext').textContent=x.q;box.innerHTML='';document.getElementById('msg').textContent='';
+  x.o.forEach(function(t,i){
+    var b=document.createElement('button');b.className='opt';b.textContent=t;
+    b.onclick=function(){
+      if(i===x.a){b.classList.add('ok');qi++;
+        document.getElementById('b1').style.width=(qi/Q.length*100)+'%';
+        setTimeout(function(){if(qi<Q.length){showQ()}else{go('puzzle');setTimeout(setupPuzzle,900)}},650)}
+      else{b.classList.remove('no');void b.offsetWidth;b.classList.add('no');
+        document.getElementById('msg').textContent='That\'s not quite it... try again 🥺';}
+    };
+    box.appendChild(b);
+  });
+}
+showQ();
+
+// Puzzle: catch the falling letters of MAAZ with a draggable basket
+var WORD='MAAZ';
+var catchwrap,basket,caughtRow,pmsg,retryBtn;
+var caughtCount=0,spawnTimer=null,gameOver=false;
+
+function setupPuzzle(){
+  catchwrap=document.getElementById('catchwrap');
+  basket=document.getElementById('basket');
+  caughtRow=document.getElementById('caughtRow');
+  pmsg=document.getElementById('pmsg');
+  retryBtn=document.getElementById('retryBtn');
+
+  // clear any falling letters
+  Array.from(catchwrap.querySelectorAll('.fall-letter')).forEach(function(el){el.remove()});
+  caughtCount=0;gameOver=false;
+  caughtRow.innerHTML='';
+  WORD.split('').forEach(function(){var s=document.createElement('div');s.className='cslot';caughtRow.appendChild(s)});
+  pmsg.textContent='';
+  retryBtn.classList.add('hide');
+  if(spawnTimer)clearInterval(spawnTimer);
+
+  var idx=0;
+  function spawn(){
+    if(idx>=WORD.length||gameOver){clearInterval(spawnTimer);return}
+    var el=document.createElement('div');el.className='fall-letter';el.textContent=WORD[idx];
+    el.dataset.i=idx;idx++;
+    var wrapW=catchwrap.clientWidth;
+    el.style.left=Math.max(6,Math.random()*(wrapW-56))+'px';
+    el._y=-50;                       // start just above the box
+    el._v=95+Math.random()*35;       // fall speed in px/second
+    el.style.transform='translateY(-50px)';
+    catchwrap.appendChild(el);
+  }
+  spawnTimer=setInterval(spawn,1400);
+  spawn();
+
+  // basket drag control
+  function moveBasketTo(clientX){
+    var rect=catchwrap.getBoundingClientRect();
+    var x=clientX-rect.left;
+    x=Math.max(32,Math.min(rect.width-32,x));
+    basket.style.left=x+'px';
+  }
+  catchwrap.onpointermove=function(e){if(!gameOver)moveBasketTo(e.clientX)};
+  catchwrap.onpointerdown=function(e){if(!gameOver)moveBasketTo(e.clientX)};
+
+  // game loop: move letters down + check catches
+  if(window._catchLoop)cancelAnimationFrame(window._catchLoop);
+  var last=performance.now();
+  function loop(now){
+    var dt=Math.min(0.05,(now-last)/1000);last=now;
+    if(!gameOver){
+      var bRect=basket.getBoundingClientRect();
+      var h=catchwrap.clientHeight;
+      Array.from(catchwrap.querySelectorAll('.fall-letter')).forEach(function(el){
+        if(gameOver)return;
+        el._y+=el._v*dt;
+        el.style.transform='translateY('+el._y+'px)';
+        var eRect=el.getBoundingClientRect();
+        if(eRect.bottom>=bRect.top+6 && eRect.top<=bRect.bottom && eRect.left<bRect.right && eRect.right>bRect.left){
+          el.remove();
+          catchLetter(+el.dataset.i);
+        }else if(el._y>h){
+          el.remove();
+          missLetter();
+        }
+      });
+    }
+    window._catchLoop=requestAnimationFrame(loop);
+  }
+  window._catchLoop=requestAnimationFrame(loop);
+}
+
+function catchLetter(i){
+  if(gameOver)return;
+  caughtRow.children[i].textContent=WORD[i];
+  caughtCount++;
+  if(caughtCount>=WORD.length){
+    gameOver=true;
+    if(spawnTimer)clearInterval(spawnTimer);
+    pmsg.textContent='You caught me completely 💖';
+    setTimeout(win,600);
+  }
+}
+
+function missLetter(){
+  if(gameOver)return;
+  gameOver=true;
+  if(spawnTimer)clearInterval(spawnTimer);
+  pmsg.textContent='Oh no, you missed one... try again? 🥺';
+  retryBtn.classList.remove('hide');
+}
+
+function win(){document.getElementById('pop').classList.add('show');confetti()}
+function closePop(){document.getElementById('pop').classList.remove('show');go('gift')}
+function confetti(){
+  var s=['💔','🤍','🐼','🌸','😔','💖'];
+  for(var i=0;i<36;i++){var c=document.createElement('div');c.className='conf';c.textContent=s[i%s.length];
+    c.style.left=Math.random()*100+'vw';c.style.animationDuration=(2.5+Math.random()*2.5)+'s';c.style.animationDelay=(Math.random()*1.2)+'s';
+    document.body.appendChild(c);setTimeout(function(x){x.remove()},7000,c)}
+}
+</script>
+</body>
+</html>
